@@ -2,9 +2,9 @@ trigger:
 - main
 
 variables:
-  LogicAppName: 'YourLogicAppName'
-  Location: 'eastus'
-  ResourceGroup: 'YourResourceGroup'
+  LogicAppName: 'TestDevopsdeployement'
+  Location: 'Central India '
+  ResourceGroup: 'test-rg01'
 
 pool:
   vmImage: 'ubuntu-latest'
