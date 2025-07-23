@@ -1,0 +1,105 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_TimerJob_name": {
+            "defaultValue": "TimerJob",
+            "type": "String"
+        },
+        "connections_MicrosoftSentinel_SNOW_CreateAndUpdateIncident_externalid": {
+            "defaultValue": "/subscriptions/e62a4643-1777-489d-8615-992e6eb09eda/resourceGroups/test-rg01/providers/Microsoft.Web/connections/MicrosoftSentinel-SNOW-CreateAndUpdateIncident",
+            "type": "String"
+        },
+        "connections_visualstudioteamservices_8_externalid": {
+            "defaultValue": "/subscriptions/e62a4643-1777-489d-8615-992e6eb09eda/resourceGroups/test-rg01/providers/Microsoft.Web/connections/visualstudioteamservices-8",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('workflows_TimerJob_name')]",
+            "location": "centralindia",
+            "tags": {
+                "displayName": "LogicApp"
+            },
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "$connections": {
+                            "defaultValue": {},
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "Microsoft_Sentinel_incident": {
+                            "type": "ApiConnectionWebhook",
+                            "inputs": {
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['azuresentinel']['connectionId']"
+                                    }
+                                },
+                                "body": {
+                                    "callback_url": "@listCallbackUrl()"
+                                },
+                                "path": "/incident-creation"
+                            }
+                        }
+                    },
+                    "actions": {
+                        "Create_a_work_item": {
+                            "runAfter": {},
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['visualstudioteamservices-3']['connectionId']"
+                                    }
+                                },
+                                "method": "patch",
+                                "body": {
+                                    "title": "Epic",
+                                    "description": "<p class=\"editor-paragraph\">Test epic</p>"
+                                },
+                                "path": "/@{encodeURIComponent('testlogicdev')}/_apis/wit/workitems/$@{encodeURIComponent('Epic')}",
+                                "queries": {
+                                    "account": "v-vmandasaty0220"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": {
+                    "$connections": {
+                        "value": {
+                            "azuresentinel": {
+                                "id": "/subscriptions/e62a4643-1777-489d-8615-992e6eb09eda/providers/Microsoft.Web/locations/centralindia/managedApis/azuresentinel",
+                                "connectionId": "[parameters('connections_MicrosoftSentinel_SNOW_CreateAndUpdateIncident_externalid')]",
+                                "connectionName": "MicrosoftSentinel-SNOW-CreateAndUpdateIncident",
+                                "connectionProperties": {
+                                    "authentication": {
+                                        "type": "ManagedServiceIdentity"
+                                    }
+                                }
+                            },
+                            "visualstudioteamservices-3": {
+                                "id": "/subscriptions/e62a4643-1777-489d-8615-992e6eb09eda/providers/Microsoft.Web/locations/centralindia/managedApis/visualstudioteamservices",
+                                "connectionId": "[parameters('connections_visualstudioteamservices_8_externalid')]",
+                                "connectionName": "visualstudioteamservices-8"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
