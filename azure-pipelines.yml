@@ -1,0 +1,25 @@
+trigger:
+- main
+
+variables:
+  LogicAppName: 'YourLogicAppName'
+  Location: 'eastus'
+  ResourceGroup: 'YourResourceGroup'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'AzureServiceConnection'
+    subscriptionId: '$(SubscriptionId)'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: '$(ResourceGroup)'
+    location: '$(Location)'
+    templateLocation: 'Linked artifact'
+    csmFile: 'template.json'
+    csmParametersFile: 'parameters.json'
+    overrideParameters: '-logicAppName $(LogicAppName)'
+    deploymentMode: 'Incremental'
