@@ -2,7 +2,7 @@ trigger:
 - main
 
 variables:
-  LogicAppName: 'TimerJob'  # Matches workflows_TimerJob_name default
+  LogicAppName: 'TimerJob-test'  # Matches workflows_TimerJob_name default
   Location: 'Central India'
   ResourceGroup: 'test-rg01'
   SubscriptionId: 'e62a4643-1777-489d-8615-992e6eb09eda'  # Replace with actual subscription ID
