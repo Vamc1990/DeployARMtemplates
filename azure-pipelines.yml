@@ -3,8 +3,9 @@ trigger:
 
 variables:
   LogicAppName: 'TestDevopsdeployement'
-  Location: 'Central India '
+  Location: 'Central India'
   ResourceGroup: 'test-rg01'
+  SubscriptionId: 'e62a4643-1777-489d-8615-992e6eb09eda'  # Replace with your actual subscription ID
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -13,13 +14,13 @@ steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'AzureServiceConnection'
+    azureResourceManagerConnection: 'AzureServiceConnection'  # Ensure this matches your actual service connection name
     subscriptionId: '$(SubscriptionId)'
     action: 'Create Or Update Resource Group'
     resourceGroupName: '$(ResourceGroup)'
     location: '$(Location)'
     templateLocation: 'Linked artifact'
-    csmFile: 'template.json'
-    csmParametersFile: 'parameters.json'
+    csmFile: 'template.json'  # Adjust path if needed
+    csmParametersFile: 'parameters.json'  # Adjust path if needed
     overrideParameters: '-logicAppName $(LogicAppName)'
     deploymentMode: 'Incremental'
