@@ -2,13 +2,19 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "workflows_TimerJob_name": {
+        "workflows_testbackupreport_name": {
             "value": null
         },
-        "connections_MicrosoftSentinel_SNOW_CreateAndUpdateIncident_externalid": {
+        "workspaces_testloganalytics_externalid": {
             "value": null
         },
-        "connections_visualstudioteamservices_8_externalid": {
+        "connections_centralindia_office365_externalid": {
+            "value": null
+        },
+        "connections_azuremonitorlogs_5_externalid": {
+            "value": null
+        },
+        "connections_wdatp_2_externalid": {
             "value": null
         }
     }
