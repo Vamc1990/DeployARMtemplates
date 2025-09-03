@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "workflows_testbackupreport_name": {
-            "defaultValue": "testbackupreport",
+            "defaultValue": "testbackupreport-test",
             "type": "String"
         },
         "workspaces_testloganalytics_externalid": {
