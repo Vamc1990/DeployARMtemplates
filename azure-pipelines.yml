@@ -22,6 +22,4 @@ steps:
     templateLocation: 'Linked artifact'
     csmFile: 'template.json'
     csmParametersFile: 'parameters.json'
-    overrideParameters: >
-      -workflows_testbackupreport_name $(LogicAppName)
     deploymentMode: 'Incremental'
