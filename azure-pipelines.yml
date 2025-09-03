@@ -23,5 +23,5 @@ steps:
     csmFile: 'template.json'
     csmParametersFile: 'parameters.json'
     overrideParameters: >
-      -workflows_TimerJob_name $(LogicAppName)
+      -workflows_testbackupreport_name $(LogicAppName)
     deploymentMode: 'Incremental'
