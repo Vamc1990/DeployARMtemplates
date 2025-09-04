@@ -2,7 +2,7 @@ trigger:
 - main
 
 variables:
-  LogicAppName: 'DNSzonereport-test2' 
+  LogicAppName: 'testeventgrid-test' 
   Location: 'Central India'
   ResourceGroup: 'test-rg01'
   SubscriptionId: 'e62a4643-1777-489d-8615-992e6eb09eda'  # Replace with actual subscription ID
@@ -11,7 +11,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: AzureResourceManagerTemplateDeployment@3
+- task: TemplateDeployment@testeventgrid
   inputs:
     deploymentScope: 'Resource Group'
     azureResourceManagerConnection: 'AzureServiceConnection'  # Replace with actual name
