@@ -2,7 +2,7 @@ trigger:
 - main
 
 variables:
-  LogicAppName: 'DNSzonereport-test' 
+  LogicAppName: 'DNSzonereport-test2' 
   Location: 'Central India'
   ResourceGroup: 'test-rg01'
   SubscriptionId: 'e62a4643-1777-489d-8615-992e6eb09eda'  # Replace with actual subscription ID
