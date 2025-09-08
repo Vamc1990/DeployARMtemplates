@@ -29,4 +29,7 @@ steps:
     templateLocation: 'Linked artifact'
     csmFile: 'template.json'
     csmParametersFile: 'parameters.json'
+    overrideParameters: >
+      -LogicAppName "$(LogicAppName)"
     deploymentMode: 'Incremental'
+    
