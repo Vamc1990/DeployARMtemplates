@@ -30,6 +30,6 @@ steps:
     csmFile: 'template.json'
     csmParametersFile: 'parameters.json'
     overrideParameters: >
-      -LogicAppName "$(LogicAppName)"
+      -workflows_name "$(LogicAppName)"
     deploymentMode: 'Incremental'
     
