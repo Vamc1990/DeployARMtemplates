@@ -4,7 +4,9 @@ trigger:
       - main
   paths:
     include:
-      - 'azure-pipelines.yml'
+      - azure-pipelines.yml
+      - template.json
+      - parameters.json
 
 variables:
   LogicAppName: 'LogicAppName-CI' 
